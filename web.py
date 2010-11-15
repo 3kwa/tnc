@@ -1,4 +1,5 @@
 import os.path
+import json
 
 import cherrypy
 
@@ -119,7 +120,16 @@ class App(object):
         cherrypy.response.headers['Content-Type'] = 'application/json'
         return publish_json()
 
-
+    @cherry.expose
+    def submission(self, **form):
+        try:
+            values = forms.validate_submission(form)
+            errors = {}
+        except forms.Invalid, e:
+            values = e.value
+            errors = e.unpack_errors()
+        cherrypy.response.headers['Content-Type'] = 'application/json'
+        return json.dumps({'values' : values, 'errors' : errors})
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 config_file = os.path.join(current_dir, 'web.conf')

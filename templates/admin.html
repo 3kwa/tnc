@@ -1,0 +1,58 @@
+<%inherit file="base.html"/>
+
+<div id="trash" class="container">
+<div class="swatch orange"></div>
+<h1>reject</h1>
+% for submission in trash:
+<div id="submission-${submission.id}" class="item submission trashed">
+    <p>${submission.project_name}
+    @ ${submission.town} ${submission.postcode}</p>
+    <p>${submission.what}</p>
+    <p>${submission.why}</p>
+</div>
+% endfor
+</div>
+
+<div id="submission" class="container">
+<div class="swatch blue"></div>
+<h1>submissions</h1>
+% for submission in submissions:
+<div id="submission-${submission.id}" class="item submission">
+    <p>${submission.project_name}
+    @ ${submission.town} ${submission.postcode}</p>
+    <p>${submission.what}</p>
+    <p>${submission.why}</p>
+</div>
+% endfor
+</div>
+
+
+<div id="accept" class="container">
+<div class="swatch green"></div>
+<h1>accept</h1>
+% for project in projects:
+    ${project_item(project, 'accepted')}
+% endfor
+</div>
+
+<div id="publish" class="container">
+<div class="swatch grey"></div>
+<h1>publish</h1>
+% for project in public:
+    ${project_item(project, 'published')}
+% endfor
+
+</div>
+
+<div id="status">
+${status |n}
+</div>
+
+<%def name="project_item(project, cls)">
+<div id="project-${project.id}" class="item project ${cls}">
+    <p>${project.title}
+    @ ${project.submission.town} ${project.submission.postcode}</p>
+    <p>${project.description}</p>
+    <p>${project.photos or ''} ${project.videos or ''}</p>
+</div>
+</%def>

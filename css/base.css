@@ -1,3 +1,158 @@
+html {
+    min-height: 100%;
+    height: auto;
+}
+
 body {
-    background-color:green
+    background-image : url('/tnc/images/stripe.png');
+    color : white;
+    height : 100%;
+    min-width : 1170px;
+}
+
+h1 {
+    color : #333333;
+}
+.error-message {
+    color : orange;
+}
+
+.error-input {
+    border : 2px solid orange;
+}
+
+.error {
+    color : orange;
+}
+
+div.submission {
+    background-color:blue;
+}
+
+div.item {
+    width:95%;
+    border: 1px dashed white;
+    padding: 5px;
+    height : 20px;
+    overflow : hidden;
+}
+
+div.item.hover {
+    height : auto;
+}
+
+div.container {
+    float : left;
+    width : 24%;
+    padding:0 5px 0 5px;
+    border-left : 2px dashed #eeeeee;
+}
+
+div.container:first-child {
+    border:0;
+}
+
+div.blue {
+    background-color : blue;
+}
+
+div.orange {
+    background-color : orange;
+}
+
+div.trashed {
+    background-color : orange;
+}
+
+div.green {
+    background-color : green;
+}
+
+div.accepted {
+    background-color : green;
+}
+
+div.grey {
+    background-color : grey;
+}
+
+div.published {
+    background-color : grey;
+}
+
+#status {
+    background-color : darkblue;
+    position : fixed;
+    bottom : 0;
+    left : 0;
+    width : 100%;
+}
+
+#status label {
+    font-weight : bold;
+    font-size : 1.3em;
+}
+
+#status table {
+    width : 100%;
+}
+
+#status table td {
+    border : 0;
+    vertical-align : bottom;
+}
+#status td.wide {
+    width : 100%;
+}
+
+#status #text {
+    width : 100%;
+}
+
+div.swatch {
+    margin-top : 1.3em;
+    margin-right : 1.3em;
+    width : 20px;
+    height : 20px;
+    float : left;
+}
+
+h1 {
+    float : left;
+}
+
+form#edit li{
+    display : block;
+    width : 100%;
+}
+
+form#edit label{
+    margin-top : 5px;
+    display : block;
+}
+
+form#edit input {
+    width : 100%;
+}
+
+form#edit input#title {
+    width : auto;
+}
+
+form#edit input.submit {
+    margin-top : 10px;
+    width : auto;
+}
+
+form#edit textarea {
+    width : 100%;
+}
+
+form#edit ul {
+    margin : 10px;
+}
+
+form#edit a {
+    font-weight : bold;
+    color : orange;
 }

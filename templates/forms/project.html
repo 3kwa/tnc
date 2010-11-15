@@ -1,0 +1,28 @@
+<form action="project/${project.id}/edit" method="POST" name="edit" id="edit">
+<ul>
+    <li>
+        <label for="title">title:</label>
+        <form:error name="title" format="default" />
+        <input type="text" name="title" id="title" />
+        @ ${project.submission.town} ${project.submission.postcode}
+    </li>
+    <li>
+        <label for="description">description:</label>
+        <form:error name="description" format="default" />
+        <textarea id="description" name="description" rows="10" cols="30">
+        </textarea>
+    </li>
+    <li>
+        <label for="photos">photos:</label>
+        <form:error name="photos" format="default" />
+        <input type="text" name="photos" id="photos" />
+    </li>
+    <li>
+        <label for="videos">videos:</label>
+        <form:error name="videos" format="default" />
+        <input type="text" name="videos" id="videos" />
+    </li>
+    <li><input type="submit" value="submit" class="submit" />
+    <a href="project/${project.id}/cancel">cancel</a></li>
+</ul>
+</form>

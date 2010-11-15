@@ -1,0 +1,41 @@
+<form action="" method="POST" name="submission" id="submission">
+<ul>
+    ${input('firstname', 'Firstname')}
+    ${input('lastname', 'Lastname')}
+    ${input('email', 'Email')}
+    ${input('town', 'Town')}
+    ${input('postcode', 'Postcode')}
+    ${input('project_name', 'Project name')}
+    <li>
+        <label for="what">what</label>
+        <form:error name="what" format="default">
+        <textarea id="what" name="what" rows="10" cols="30"></textarea>
+    </li>
+    <li>
+        <label for="why">why</label>
+        <form:error name="why" format="default">
+        <textarea id="why" name="why" rows="10" cols="30"></textarea>
+    </li>
+    <li>
+        <label for="optin">optin</label>
+        <input type="checkbox" name="optin" id="optin"/>
+    </li>
+    <li>
+        <label for="tc">tc</label>
+        <form:error name="tc" format="default">
+        <input type="checkbox" name="tc" id="tc"/>
+    </li>
+    <li>
+        <input type="submit" value="submit"/>
+    </li>
+</ul>
+</form>
+
+<%def name="input(field, label)">
+<form:iferror name="not ${field}"> <li> </form:iferror>
+<form:iferror name="${field}"> <li class="error"> </form:iferror>
+    <label for="${field}">${label}</label>
+    <form:error name="${field}" format="default">
+    <input type="text" name="${field}" id="${field}" />
+</li>
+</%def>

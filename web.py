@@ -120,7 +120,7 @@ class App(object):
         cherrypy.response.headers['Content-Type'] = 'application/json'
         return publish_json()
 
-    @cherry.expose
+    @cherrypy.expose
     def submission(self, **form):
         try:
             values = forms.validate_submission(form)

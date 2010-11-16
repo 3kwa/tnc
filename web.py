@@ -128,6 +128,8 @@ class App(object):
         except forms.Invalid, e:
             values = e.value
             errors = e.unpack_errors()
+        else:
+            models.save_submission(values)
         cherrypy.response.headers['Content-Type'] = 'application/json'
         return json.dumps({'values' : values, 'errors' : errors})
 

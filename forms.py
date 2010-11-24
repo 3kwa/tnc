@@ -14,6 +14,7 @@ class SubmissionSchema(Schema):
     project_name = validators.String(not_empty=True)
     what = validators.String(not_empty=True)
     why = validators.String(not_empty=True)
+    people = validators.Int(not_empty=True)
     optin = validators.StringBool(if_missing=False)
     tc = validators.StringBool(not_empty=True)
 
@@ -27,9 +28,10 @@ def validate_submission(form):
     ...          'project_name' : 'South Steyne SLSC',
     ...          'what' : 'add one floor to the building',
     ...          'why' : 'allow us to serve our community better',
+    ...          'people' : 327,
     ...          'tc' : 'on'}
     >>> validate_submission(VALID)
-    {'town': 'manly', 'what': 'add one floor to the building', 'project_name': 'South Steyne SLSC', 'firstname': 'eugene', 'lastname': 'van den bulke', 'why': 'allow us to serve our community better', 'optin': False, 'email': 'eugene.vandenbulke@gmail.com', 'postcode': 2095, 'tc': True}
+    {'town': 'manly', 'what': 'add one floor to the building', 'project_name': 'South Steyne SLSC', 'firstname': 'eugene', 'people': 327, 'lastname': 'van den bulke', 'why': 'allow us to serve our community better', 'optin': False, 'email': 'eugene.vandenbulke@gmail.com', 'postcode': 2095, 'tc': True}
 """
     return SubmissionSchema(allow_extra_fields=True).to_python(form)
 

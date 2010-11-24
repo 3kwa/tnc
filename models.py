@@ -125,8 +125,6 @@ def publish_json():
 
 def current_status():
     """
-    when no status return None
-
     >>> current_status().text
     'The Tooheys New Crew is getting ready to rock your world'
 
@@ -150,7 +148,31 @@ def current_status():
             beer=0)
 
 def save_status(form):
-    Status(**form)
+    """
+    >>> save_status({'text' : 'Only status'})
+    <Status 2 text='Only status' beer=0>
+
+    >>> save_status({'beer' : 666})
+    <Status 3 text='Only status' beer=666>
+
+    >>> save_status({'text' : '', 'beer' : 777})
+    <Status 4 text='Only status' beer=777>
+
+    >>> save_status({'text' : 'The full monty', 'beer' : 1000})
+    <Status 5 text='The full monty' beer=1000>
+    """
+    # ugly change of requirement fix (beer)
+    # String validators defaults to '' when empty
+    # Int defaults to None but set to -1 in Schema using if_empty
+    current = current_status()
+    was = {'text' : current.text, 'beer' : current.beer}
+    # using get so doctest can be agnostic (smart?)
+    if form.get('text', None) =='':
+        del form['text']
+    if form.get('beer', None) == -1:
+        del form['beer']
+    was.update(form)
+    return Status(**was)
 
 def get_project(id_):
     return Project.get(id_)

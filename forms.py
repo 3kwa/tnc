@@ -50,6 +50,7 @@ def render_submission(defaults={}, errors={}):
 
 class StatusSchema(Schema):
     text = validators.String(not_empty=True)
+    beer = validators.Int(not_empty=True)
 
 def validate_status(form):
     return StatusSchema(allow_extra_fields=True).to_python(form)

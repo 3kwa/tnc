@@ -29,6 +29,7 @@ class Project(SQLObject):
 
 class Status(SQLObject):
     text = StringCol()
+    beer = IntCol()
 
 
 def save_submission(form):
@@ -87,7 +88,7 @@ def create_db():
 def publish_json():
     """
     >>> publish_json()
-    '{"status": "", "comment": [], "landing": []}'
+    '{"status": "The Tooheys New Crew is getting ready to rock your world", "comment": [], "beer": 0, "landing": []}'
     """
     landing = []
     for project in unpublished_projects():
@@ -110,7 +111,15 @@ def publish_json():
             'photos' : project.photos,
             'videos' : project.videos
             })
-    return json.dumps({'status' : current_status(),
+    status = current_status()
+    if status is not None:
+        text = status.text
+        beer = status.beer
+    else:
+        text = ''
+        beer = 0
+    return json.dumps({'status' : text,
+                       'beer' : beer,
                        'comment' : comment,
                        'landing' : landing})
 
@@ -118,15 +127,15 @@ def current_status():
     """
     when no status return None
 
-    >>> current_status()
-    ''
+    >>> current_status().text
+    'The Tooheys New Crew is getting ready to rock your world'
 
-    >>> man = Status(text='first')
-    >>> current_status()
+    >>> man = Status(text='first', beer=1)
+    >>> current_status().text
     'first'
 
-    >>> man = Status(text='latest')
-    >>> current_status()
+    >>> man = Status(text='latest', beer=1)
+    >>> current_status().text
     'latest'
 
     tear down
@@ -134,9 +143,11 @@ def current_status():
     ...     status.destroySelf()
     """
     try:
-        return Status.select(orderBy='-id')[0].text
+        return Status.select(orderBy='-id')[0]
     except IndexError:
-        return ''
+        return Status(text=
+            'The Tooheys New Crew is getting ready to rock your world',
+            beer=0)
 
 def save_status(form):
     Status(**form)

@@ -91,7 +91,7 @@ def publish_json():
     '{"status": "The Tooheys New Crew is getting ready to rock your world", "comment": [], "beer": 0, "landing": []}'
     """
     landing = []
-    for project in unpublished_projects():
+    for project in published_projects():
         landing.append({
             'title' : project.title,
             'town' : project.submission.town,
@@ -102,7 +102,7 @@ def publish_json():
             })
 
     comment = []
-    for project in published_projects():
+    for project in unpublished_projects():
         comment.append({
             'title' : project.title,
             'town' : project.submission.town,

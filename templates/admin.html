@@ -29,7 +29,7 @@
 
 <div id="accept" class="container">
 <div class="swatch green"></div>
-<h1>accept</h1>
+<h1>shortlist</h1>
 % for project in projects:
     ${project_item(project, 'accepted')}
 % endfor
@@ -37,7 +37,7 @@
 
 <div id="publish" class="container">
 <div class="swatch grey"></div>
-<h1>publish</h1>
+<h1>going ahead / job done</h1>
 % for project in public:
     ${project_item(project, 'published')}
 % endfor

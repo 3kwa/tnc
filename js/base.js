@@ -44,13 +44,15 @@ $(document).ready(function() {
                .live('mouseout', function () {
             $(this).removeClass("hover")})
 
+    // edit form submission
     $("form#edit").live('submit', function (e) {
         e.preventDefault()
         var container = $(this).parent()
         $.post($(this).attr('action'),
             $(this).serialize(),
             function(result) {
-                container.html(result)
+                container.html($(result).children())
+                    .removeClass('hover').css({'height' : ''})
         });
     })
 

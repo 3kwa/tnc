@@ -4,7 +4,9 @@ html {
 }
 
 body {
-    background-image : url('/tnc/images/stripe.png');
+    background-image : url('/tnc/images/logo.png'), url('/tnc/images/stripe.png');
+    background-repeat : no-repeat, repeat;
+    background-position : center center, top left;
     color : white;
     height : 100%;
     min-width : 1170px;

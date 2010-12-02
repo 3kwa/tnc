@@ -15,7 +15,7 @@ class Submission(SQLObject):
     project_name = StringCol()
     what = StringCol()
     why = StringCol()
-    people = IntCol()
+    people = StringCol()
     optin = BoolCol()
     checked = BoolCol(default=False)
 

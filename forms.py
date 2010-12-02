@@ -5,12 +5,26 @@ from formencode import htmlfill
 
 from templates import serve_template
 
+EMAIL_MESSAGES = {
+    'badDomain' : 'Please enter a valid email',
+    'badType' : 'Please enter a valid email',
+    'badUsername' : 'Please enter a valid email',
+    'noAt' : 'Please enter a valid email'}
+
+POSTCODE_MESSAGES = {
+    'integer' : 'Please enter a valid postcode'
+}
+
+TC_MESSAGES = {
+    'empty' : 'Please agree to the terms and conditions'
+}
+
 class SubmissionSchema(Schema):
     firstname = validators.String(not_empty=True)
     lastname = validators.String(not_empty=True)
-    email = validators.Email(not_empty=True)
+    email = validators.Email(not_empty=True, messages=EMAIL_MESSAGES)
     town = validators.String(not_empty=True)
-    postcode = validators.Int(not_empty=True)
+    postcode = validators.Int(not_empty=True, messages=POSTCODE_MESSAGES)
     project_name = validators.String(not_empty=True)
     what = validators.String(not_empty=True)
     why = validators.String(not_empty=True)
@@ -20,6 +34,11 @@ class SubmissionSchema(Schema):
 
 def validate_submission(form):
     """
+    >>> try:
+    ...     validate_submission({'email' : 'NOT', 'postcode' : 'NOT'})
+    ... except Invalid, e:
+    ...     pass
+
     >>> VALID = {'firstname' : 'eugene',
     ...          'lastname': 'van den bulke',
     ...          'email' : 'eugene.vandenbulke@gmail.com',

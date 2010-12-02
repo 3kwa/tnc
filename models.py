@@ -26,6 +26,7 @@ class Project(SQLObject):
     photos = StringCol(default='')
     videos = StringCol(default='')
     publish = BoolCol(default=False)
+    date = DateCol(default=None)
 
 class Status(SQLObject):
     text = StringCol()

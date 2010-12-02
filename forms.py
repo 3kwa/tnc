@@ -5,40 +5,70 @@ from formencode import htmlfill
 
 from templates import serve_template
 
+FIRSTNAME_MESSAGES = {
+    'empty' : 'Please enter your firstname'
+}
+LASTNAME_MESSAGES = {
+    'empty' : 'Please enter your lastname'
+}
 EMAIL_MESSAGES = {
     'badDomain' : 'Please enter a valid email',
     'badType' : 'Please enter a valid email',
     'badUsername' : 'Please enter a valid email',
     'noAt' : 'Please enter a valid email'}
-
-POSTCODE_MESSAGES = {
-    'integer' : 'Please enter a valid postcode'
+TOWN_MESSAGES = {
+    'empty' : 'Please enter a town'
 }
-
+POSTCODE_MESSAGES = {
+    'integer' : 'Please enter a valid postcode',
+    'empty' : 'Please enter a valid postcode'
+}
+PROJECT_MESSAGES = {
+    'empty' : 'Please name your project'
+}
+WHAT_MESSAGES = {
+    'empty' : 'Please describe the favour'
+}
+WHY_MESSAGES = {
+    'empty' : 'Please describe who will benefit'
+}
+PEOPLE_MESSAGES = {
+    'empty' : 'Please enter the amount of people'
+}
 TC_MESSAGES = {
-    'empty' : 'Please agree to the terms and conditions'
+    'empty' : 'Please agree to the terms and conditions',
+    'missing' : 'Please agree to the terms and conditions'
 }
 
 class SubmissionSchema(Schema):
-    firstname = validators.String(not_empty=True)
-    lastname = validators.String(not_empty=True)
+    messages = {'tc' : 'nope'}
+    firstname = validators.String(not_empty=True, messages=FIRSTNAME_MESSAGES)
+    lastname = validators.String(not_empty=True, messages=LASTNAME_MESSAGES)
     email = validators.Email(not_empty=True, messages=EMAIL_MESSAGES)
-    town = validators.String(not_empty=True)
+    town = validators.String(not_empty=True, messages=TOWN_MESSAGES)
     postcode = validators.Int(not_empty=True, messages=POSTCODE_MESSAGES)
-    project_name = validators.String(not_empty=True)
-    what = validators.String(not_empty=True)
-    why = validators.String(not_empty=True)
-    people = validators.String(not_empty=True)
+    project_name = validators.String(not_empty=True, messages=PROJECT_MESSAGES)
+    what = validators.String(not_empty=True, messages=WHAT_MESSAGES)
+    why = validators.String(not_empty=True, messages=WHY_MESSAGES)
+    people = validators.String(not_empty=True, messages=PEOPLE_MESSAGES)
     optin = validators.StringBool(if_missing=False)
-    tc = validators.StringBool(not_empty=True)
+    tc = validators.StringBool(not_empty=True, messages=TC_MESSAGES)
 
 def validate_submission(form):
     """
     >>> try:
-    ...     validate_submission({'email' : 'NOT', 'postcode' : 'NOT'})
+    ...     validate_submission({'firstname': None,
+    ...                          'lastname' : None,
+    ...                          'email' : 'NOT',
+    ...                          'town' : None,
+    ...                          'postcode' : 'NOT',
+    ...                          'project_name' : None,
+    ...                          'what' : None,
+    ...                          'why' : None,
+    ...                          'people' : None})
     ... except Invalid, e:
-    ...     pass
-
+    ...     e.unpack_errors()
+    {'town': u'Please enter a town', 'what': u'Please describe the favour', 'project_name': u'Please name your project', 'firstname': u'Please enter your firstname', 'people': u'Please enter the amount of people', 'lastname': u'Please enter your lastname', 'why': u'Please describe who will benefit', 'email': u'Please enter a valid email', 'postcode': u'Please enter a valid postcode', 'tc': u'Please agree to the terms and conditions'}
     >>> VALID = {'firstname' : 'eugene',
     ...          'lastname': 'van den bulke',
     ...          'email' : 'eugene.vandenbulke@gmail.com',

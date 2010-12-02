@@ -7,28 +7,29 @@ from sqlobject import *
 
 
 class Submission(SQLObject):
-    firstname = StringCol()
-    lastname = StringCol()
-    email = StringCol()
-    town = StringCol()
+    firstname = UnicodeCol()
+    lastname = UnicodeCol()
+    email = UnicodeCol()
+    town = UnicodeCol()
     postcode = IntCol()
-    project_name = StringCol()
-    what = StringCol()
-    why = StringCol()
-    people = IntCol()
+    project_name = UnicodeCol()
+    what = UnicodeCol()
+    why = UnicodeCol()
+    people = UnicodeCol()
     optin = BoolCol()
     checked = BoolCol(default=False)
 
 class Project(SQLObject):
     submission = ForeignKey('Submission')
-    title = StringCol()
-    description = StringCol()
-    photos = StringCol(default='')
-    videos = StringCol(default='')
+    title = UnicodeCol()
+    description = UnicodeCol()
+    photos = UnicodeCol(default='')
+    videos = UnicodeCol(default='')
     publish = BoolCol(default=False)
+    date = DateCol(default=None)
 
 class Status(SQLObject):
-    text = StringCol()
+    text = UnicodeCol()
     beer = IntCol()
 
 
@@ -126,15 +127,15 @@ def publish_json():
 def current_status():
     """
     >>> current_status().text
-    'The Tooheys New Crew is getting ready to rock your world'
+    u'The Tooheys New Crew is getting ready to rock your world'
 
     >>> man = Status(text='first', beer=1)
     >>> current_status().text
-    'first'
+    u'first'
 
     >>> man = Status(text='latest', beer=1)
     >>> current_status().text
-    'latest'
+    u'latest'
 
     tear down
     >>> for status in Status.select():
@@ -150,16 +151,16 @@ def current_status():
 def save_status(form):
     """
     >>> save_status({'text' : 'Only status'})
-    <Status 2 text='Only status' beer=0>
+    <Status 2 text=u'Only status' beer=0>
 
     >>> save_status({'beer' : 666})
-    <Status 3 text='Only status' beer=666>
+    <Status 3 text=u'Only status' beer=666>
 
     >>> save_status({'text' : '', 'beer' : 777})
-    <Status 4 text='Only status' beer=777>
+    <Status 4 text=u'Only status' beer=777>
 
     >>> save_status({'text' : 'The full monty', 'beer' : 1000})
-    <Status 5 text='The full monty' beer=1000>
+    <Status 5 text=u'The full monty' beer=1000>
     """
     # ugly change of requirement fix (beer)
     # String validators defaults to '' when empty

@@ -28,7 +28,7 @@ class SubmissionSchema(Schema):
     project_name = validators.String(not_empty=True)
     what = validators.String(not_empty=True)
     why = validators.String(not_empty=True)
-    people = validators.Int(not_empty=True)
+    people = validators.String(not_empty=True)
     optin = validators.StringBool(if_missing=False)
     tc = validators.StringBool(not_empty=True)
 
@@ -50,11 +50,11 @@ def validate_submission(form):
     ...          'people' : 327,
     ...          'tc' : 'on'}
     >>> validate_submission(VALID)
-    {'town': 'manly', 'what': 'add one floor to the building', 'project_name': 'South Steyne SLSC', 'firstname': 'eugene', 'people': 327, 'lastname': 'van den bulke', 'why': 'allow us to serve our community better', 'optin': False, 'email': 'eugene.vandenbulke@gmail.com', 'postcode': 2095, 'tc': True}
+    {'town': 'manly', 'what': 'add one floor to the building', 'project_name': 'South Steyne SLSC', 'firstname': 'eugene', 'people': '327', 'lastname': 'van den bulke', 'why': 'allow us to serve our community better', 'optin': False, 'email': 'eugene.vandenbulke@gmail.com', 'postcode': 2095, 'tc': True}
 """
     return SubmissionSchema(allow_extra_fields=True).to_python(form)
 
-def render_submission(defaults={}, errors={}):
+def render_submission(defaults=dict(), errors=dict()):
     """
     >>> 'value="eugene"' in render_submission()
     False
@@ -74,7 +74,7 @@ class StatusSchema(Schema):
 def validate_status(form):
     return StatusSchema(allow_extra_fields=True).to_python(form)
 
-def render_status(current, defaults={}, errors={}):
+def render_status(current, defaults=dict(), errors=dict()):
     form = serve_template('forms/status.html', current=current)
     return htmlfill.render(form, defaults, errors, error_class="error-input")
 
@@ -130,7 +130,7 @@ def validate_project(form):
     """
     return ProjectSchema(allow_extrafields=True).to_python(form)
 
-def render_project(project, defaults={}, errors={}):
+def render_project(project, defaults=dict(), errors=dict()):
     form = serve_template('forms/project.html', project=project)
     return htmlfill.render(form, defaults, errors, error_class="error-input")
 

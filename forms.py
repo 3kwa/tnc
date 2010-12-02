@@ -6,10 +6,10 @@ from formencode import htmlfill
 from templates import serve_template
 
 FIRSTNAME_MESSAGES = {
-    'empty' : 'Please enter your firstname'
+    'empty' : 'Please enter your first name'
 }
 LASTNAME_MESSAGES = {
-    'empty' : 'Please enter your lastname'
+    'empty' : 'Please enter your last name'
 }
 EMAIL_MESSAGES = {
     'badDomain' : 'Please enter a valid email',
@@ -41,7 +41,6 @@ TC_MESSAGES = {
 }
 
 class SubmissionSchema(Schema):
-    messages = {'tc' : 'nope'}
     firstname = validators.String(not_empty=True, messages=FIRSTNAME_MESSAGES)
     lastname = validators.String(not_empty=True, messages=LASTNAME_MESSAGES)
     email = validators.Email(not_empty=True, messages=EMAIL_MESSAGES)

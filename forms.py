@@ -105,7 +105,7 @@ def validate_status(form):
 
 def render_status(current, defaults=dict(), errors=dict()):
     form = serve_template('forms/status.html', current=current)
-    return htmlfill.render(form, defaults, errors, error_class="error-input")
+    return htmlfill.render(form.decode('utf-8'), defaults, errors, error_class="error-input")
 
 
 class ProjectSchema(Schema):

@@ -4,12 +4,7 @@
 <div class="swatch orange"></div>
 <h1>reject</h1>
 % for submission in trash:
-<div id="submission-${submission.id}" class="item submission trashed">
-    <p>${submission.project_name}
-    @ ${submission.town} ${submission.postcode}</p>
-    <p>${submission.what}</p>
-    <p>${submission.why}</p>
-</div>
+    ${submission_item(submission)}
 % endfor
 </div>
 
@@ -17,12 +12,7 @@
 <div class="swatch blue"></div>
 <h1>submissions</h1>
 % for submission in submissions:
-<div id="submission-${submission.id}" class="item submission">
-    <p>${submission.project_name}
-    @ ${submission.town} ${submission.postcode}</p>
-    <p>${submission.what}</p>
-    <p>${submission.why}</p>
-</div>
+    ${submission_item(submission)}
 % endfor
 </div>
 
@@ -54,5 +44,15 @@ ${status |n}
     @ ${project.submission.town} ${project.submission.postcode}</p>
     <p>${project.description}</p>
     <p>${project.photos or ''} ${project.videos or ''}</p>
+</div>
+</%def>
+
+<%def name="submission_item(submission)">
+<div id="submission-${submission.id}" class="item submission">
+    <p>${submission.project_name}
+    @ ${submission.town} ${submission.postcode}</p>
+    <p>${submission.what}</p>
+    <p>${submission.why}</p>
+    <p>${submission.people}</p>
 </div>
 </%def>

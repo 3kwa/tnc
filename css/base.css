@@ -48,6 +48,7 @@ div.container {
     width : 24%;
     padding:0 5px 0 5px;
     border-left : 2px dashed #eeeeee;
+    margin-bottom: 100px;
 }
 
 div.container:first-child {

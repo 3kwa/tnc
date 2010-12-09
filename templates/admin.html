@@ -49,11 +49,11 @@ ${status |n}
 
 <%def name="submission_item(submission)">
 <div id="submission-${submission.id}" class="item submission">
-    <p>${submission.project_name}
-    @ ${submission.town} ${submission.postcode}</p>
-    <p>${submission.what}</p>
-    <p>${submission.why}</p>
-    <p>${submission.people}</p>
+    <input type="text" value="${submission.project_name}" />
+    <input type="text" value="${submission.town} ${submission.postcode}" />
+    <input type="text" value="${submission.what}" />
+    <input type="text" value="${submission.why}"/>
+    <input type="text" value="${submission.people}" />
     <input type="text" value="${submission.firstname}" />
     <input type="text" value="${submission.lastname}" />
     <input type="text" value="${submission.email}" />

@@ -159,3 +159,12 @@ form#edit a {
     font-weight : bold;
     color : orange;
 }
+
+.submission input {
+    background-color: blue;
+    border : none;
+    color : white;
+    padding-top: 10px;
+    width: 100%;
+}
+
